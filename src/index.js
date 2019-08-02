@@ -1,34 +1,26 @@
-import 'phaser';
+import { AUTO, Game } from 'phaser';
+import myScene, { version } from './myScene';
+
+// Make the game fullscreen
+var WIDTH = window.screen.availWidth * window.devicePixelRatio;
+var HEIGHT = window.screen.availHeight * window.devicePixelRatio;
 
 var config = {
-    type: Phaser.AUTO,
+    type: AUTO,
     parent: 'phaser-example',
-    width: 800,
-    height: 600,
-    scene: {
-        preload: preload,
-        create: create
-    }
+    width: WIDTH,
+    height: HEIGHT,
+    scene: new myScene()
 };
 
-var game = new Phaser.Game(config);
+var game = new Game(config);
 
-function preload ()
-{
-    this.load.image('logo', 'assets/logo.png');
-}
+// function preload ()
+// {
+// }
 
-function create ()
-{
-    var logo = this.add.image(400, 150, 'logo');
+// function create ()
+// {
 
-    this.tweens.add({
-        targets: logo,
-        y: 450,
-        duration: 2000,
-        ease: 'Power2',
-        yoyo: true,
-        loop: -1
-    });
 
-}
+// }
