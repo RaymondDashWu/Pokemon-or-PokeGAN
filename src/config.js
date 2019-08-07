@@ -13,7 +13,7 @@ const config = {
     parent: 'phaser-example',
     width: WIDTH,
     height: HEIGHT,
-    scene: new quizScene1()
+    scene: new quizScene1(),
 };
 
 export { config };
