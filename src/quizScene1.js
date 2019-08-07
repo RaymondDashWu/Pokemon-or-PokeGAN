@@ -37,16 +37,38 @@ class quizScene1 extends Scene {
         const randPokemon = this.pokemon[Math.floor(Math.random() * this.pokemon.length)]
         const randGan = this.gan[Math.floor(Math.random() * this.gan.length)]
 
-        // TODO switch random position
-        const test = (400, 350, randPokemon);
+        // Will be used to switch random position for the Pokemon and generated Pokemon
+        const randPosition = [400, 900];
+        
+        // Taken from 
+        // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+        function shuffle(array) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+          
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+          
+              // Pick a remaining element...
+              randomIndex = Math.floor(Math.random() * currentIndex);
+              currentIndex -= 1;
+          
+              // And swap it with the current element.
+              temporaryValue = array[currentIndex];
+              array[currentIndex] = array[randomIndex];
+              array[randomIndex] = temporaryValue;
+            }
+          
+            return array;
+          }
 
-        this.pokemon = this.add.image(400, 350, randPokemon);
-        console.log("this.pokemon", this.pokemon)
+        // Note: shuffle(randPosition).pop() works by shuffling the location array determining left/right
+        // position and then popping that position. What's left over is then called again so it'll pick remainder
+        this.pokemon = this.add.image(shuffle(randPosition).pop(), 350, randPokemon);
         this.pokemon.setInteractive();
         this.pokemon.on('pointerdown', () => {
             this.correctClick(this.pokemon);
         });
-        this.gan = this.add.image(900, 300, randGan);
+        this.gan = this.add.image(shuffle(randPosition).pop(), 300, randGan);
         this.gan.setInteractive();
         // When picking a generated Pokemon (wrong choice) camera shakes
         this.gan.on('pointerdown', function () {
