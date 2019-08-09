@@ -27,10 +27,6 @@ class quizScene1 extends Scene {
         this.score = 0;
         this.gan = ['gan1', 'gan2', 'gan3', 'gan4', 'gan5'];
         this.pokemon = ['pokemon1', 'pokemon2', 'pokemon3', 'pokemon4', 'pokemon5']
-        
-        // list that will be updated with the pokemon and gan that have been seen
-        // this.pokemonSeen = [];
-        // this.ganSeen = [];
      }
 
     preload() {
@@ -48,7 +44,10 @@ class quizScene1 extends Scene {
 
         // loads particle effects when player gets correct choice
         this.load.atlas('flares', 'assets/particles/flares.png', 'assets/particles/flares.json');
-
+        
+        // Text assets init
+        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
+        this.text = this.add.text(500, 50, "Which of these is a real Pokemon?");
     }
 
     shufflePokemon() {
@@ -73,17 +72,24 @@ class quizScene1 extends Scene {
         });
         this.currentGan = this.add.image(shuffle(randPosition).pop(), 400, randGan);
         this.currentGan.setInteractive();
-        // When picking a generated Pokemon (wrong choice) camera shakes
+        // When picking a generated Pokemon (wrong choice) camera shakes and 
+        // scene is moved on to next round
         this.currentGan.on('pointerdown', function () {
             this.cameras.main.shake(500, .005);
+            this.currentPokemon.destroy();
+            this.currentGan.destroy();
+            this.create();
+
         }, this);
     }
 
     create() {   
-        this.shufflePokemon();
-        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
+        // Game over message
+        if (this.pokemon.length <= 0) {
+            this.add.text(150, 400, "Thanks for playing!", { fontSize: 100 });
+        }
 
-        this.text = this.add.text(500, 50, "Which of these is a real Pokemon?");
+        this.shufflePokemon();
 
         this.tweens.add({
             targets: [this.currentPokemon, this.currentGan],
@@ -94,16 +100,13 @@ class quizScene1 extends Scene {
             loop: -1
         });
 
-
         this.createParticles();
         // game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
         // let render = this.pokemon1.add.graphics();
         // let bounds = this.getBounds();
 
         // render.lineStyle(3, 0xffff37);
-        // render.strokeRectShape(bounds);
-    
-    
+        // render.strokeRectShape(bounds);    
     }
 
     // Helper function to correctClick. When player chooses a Pokemon (correct answer)
@@ -131,16 +134,7 @@ class quizScene1 extends Scene {
         this.currentPokemon.destroy();
         this.currentGan.destroy();
 
-        this.shufflePokemon();
-        
-        this.tweens.add({
-            targets: [this.currentPokemon, this.currentGan],
-            y: 600,
-            duration: 4000,
-            ease: 'Power2',
-            yoyo: true,
-            loop: -1
-        });
+        this.create();
     }
 }
 
