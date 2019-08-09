@@ -6,7 +6,7 @@ function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
   
     // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
+    while (currentIndex > 0) {
   
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
@@ -35,10 +35,10 @@ class quizScene1 extends Scene {
 
     preload() {
         // Kept this redundancy because I couldn't remember the names of most of the Pokemon
-        this.load.image('pokemon1', 'assets/nosepass-300x300.png');
+        this.load.image('pokemon1', 'assets/299Nosepass.png');
         this.load.image('pokemon2', 'assets/gulpin.png');
-        this.load.image('pokemon3', 'assets/250px-618Stunfisk.png');
-        this.load.image('pokemon4', 'assets/250px-089Muk.png');
+        this.load.image('pokemon3', 'assets/618Stunfisk.png');
+        this.load.image('pokemon4', 'assets/089Muk.png');
         this.load.image('pokemon5', 'assets/0-7903_pokemon-clipart-no-background-awesome-graphic-library-pokemon.png');
         
         // Loads all generated Pokemon
@@ -51,11 +51,7 @@ class quizScene1 extends Scene {
 
     }
 
-    // TODO switch to different pokemon
-    create() {   
-
-        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
-
+    shufflePokemon() {
         // Picks a random Pokemon and generated Pokemon
         // Note: shuffle(this.pokemon).pop() works by shuffling the pokemon/gan array picking a pokemon/gan
         // and then popping it so it doens't get picked again.
@@ -66,29 +62,33 @@ class quizScene1 extends Scene {
         // const randGan = this.gan[Math.floor(Math.random() * this.gan.length)]
 
         // Will be used to switch random position for the Pokemon and generated Pokemon
-        const randPosition = [400, 900];
+        const randPosition = [400, 1000];
         
         // Note: shuffle(randPosition).pop() works by shuffling the location array determining left/right
         // position and then popping that position. What's left over is then called again so it'll pick remainder
-        this.pokemon = this.add.image(shuffle(randPosition).pop(), 350, randPokemon);
-        this.pokemon.setInteractive();
-        this.pokemon.on('pointerdown', () => {
-            this.correctClick(this.pokemon);
+        this.currentPokemon = this.add.image(shuffle(randPosition).pop(), 450, randPokemon);
+        this.currentPokemon.setInteractive();
+        this.currentPokemon.on('pointerdown', () => {
+            this.correctClick(this.currentPokemon);
         });
-        this.gan = this.add.image(shuffle(randPosition).pop(), 300, randGan);
-        this.gan.setInteractive();
+        this.currentGan = this.add.image(shuffle(randPosition).pop(), 400, randGan);
+        this.currentGan.setInteractive();
         // When picking a generated Pokemon (wrong choice) camera shakes
-        this.gan.on('pointerdown', function () {
+        this.currentGan.on('pointerdown', function () {
             this.cameras.main.shake(500, .005);
         }, this);
+    }
 
+    create() {   
+        this.shufflePokemon();
+        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
 
         this.text = this.add.text(500, 50, "Which of these is a real Pokemon?");
 
         this.tweens.add({
-            targets: [this.pokemon, this.gan],
-            y: 450,
-            duration: 2000,
+            targets: [this.currentPokemon, this.currentGan],
+            y: 600,
+            duration: 4000,
             ease: 'Power2',
             yoyo: true,
             loop: -1
@@ -127,7 +127,20 @@ class quizScene1 extends Scene {
         this.scoreText.setText(`Score: ${this.score}`);
 
         this.particles.emitParticleAt(image.x, image.y, 50);
+        
+        this.currentPokemon.destroy();
+        this.currentGan.destroy();
 
+        this.shufflePokemon();
+        
+        this.tweens.add({
+            targets: [this.currentPokemon, this.currentGan],
+            y: 600,
+            duration: 4000,
+            ease: 'Power2',
+            yoyo: true,
+            loop: -1
+        });
     }
 }
 
