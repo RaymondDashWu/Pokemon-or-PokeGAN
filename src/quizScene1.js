@@ -5,6 +5,15 @@ import { Scene } from 'phaser';
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
   
+    const result = []
+    while(array.length > 0) {
+        const i = Math.floor(Math.random() * array.length)
+        result.push(array[i])
+        array.splice(i, 1)
+    }
+    console.log(result)
+    return result
+
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
   
@@ -31,6 +40,15 @@ class quizScene1 extends Scene {
         // list that will be updated with the pokemon and gan that have been seen
         // this.pokemonSeen = [];
         // this.ganSeen = [];
+
+        this.shuffleArrays()
+        console.log('11111111')
+        console.log(this.shuffledPokemon)
+     }
+
+     shuffleArrays() {
+        this.shuffledPokemon = shuffle(this.pokemon)
+        this.shuffledGan = shuffle(this.gan)
      }
 
     preload() {
@@ -51,16 +69,30 @@ class quizScene1 extends Scene {
 
     }
 
-    // TODO switch to different pokemon
-    create() {   
-
-        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
+    createPokemon() {
 
         // Picks a random Pokemon and generated Pokemon
         // Note: shuffle(this.pokemon).pop() works by shuffling the pokemon/gan array picking a pokemon/gan
         // and then popping it so it doens't get picked again.
-        const randPokemon = shuffle(this.pokemon).pop()
-        const randGan = shuffle(this.gan).pop()
+        if (this.shuffledPokemon.length === 0) {
+            console.log('this.shuffledPokemon.length')
+            this.shuffleArrays()
+        }
+
+        const randPokemon = this.shuffledPokemon.pop()
+        const randGan = this.shuffledGan.pop()
+
+        console.log('randPokemon', randPokemon)
+
+
+        // const pi = Math.floor(Math.random() * this.pokemon.length)
+        // const gi = Math.floor(Math.random() * this.gan.length)
+        // const randPokemon = this.pokemon[pi]
+        // const randGan = this.gan[gi].pop()
+
+        console.log("randPokemon", randPokemon)
+        console.log("randGan", randGan)
+
 
         // const randPokemon = this.pokemon[Math.floor(Math.random() * this.pokemon.length)]
         // const randGan = this.gan[Math.floor(Math.random() * this.gan.length)]
@@ -70,18 +102,26 @@ class quizScene1 extends Scene {
         
         // Note: shuffle(randPosition).pop() works by shuffling the location array determining left/right
         // position and then popping that position. What's left over is then called again so it'll pick remainder
-        this.pokemon = this.add.image(shuffle(randPosition).pop(), 350, randPokemon);
+        this.pokemon = this.add.image(randPokemon, 350, randPokemon);
         this.pokemon.setInteractive();
         this.pokemon.on('pointerdown', () => {
             this.correctClick(this.pokemon);
         });
+
         this.gan = this.add.image(shuffle(randPosition).pop(), 300, randGan);
         this.gan.setInteractive();
         // When picking a generated Pokemon (wrong choice) camera shakes
         this.gan.on('pointerdown', function () {
             this.cameras.main.shake(500, .005);
         }, this);
+    }
 
+    // TODO switch to different pokemon
+    create() {   
+
+        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
+
+        this.createPokemon()
 
         this.text = this.add.text(500, 50, "Which of these is a real Pokemon?");
 
@@ -127,7 +167,12 @@ class quizScene1 extends Scene {
         this.scoreText.setText(`Score: ${this.score}`);
 
         this.particles.emitParticleAt(image.x, image.y, 50);
+        // this.pokemon.visible = false;
+        // this.gan.visible = false;
+        this.pokemon.destroy()
+        this.gan.destroy()
 
+        this.createPokemon()
     }
 }
 
