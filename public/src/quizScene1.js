@@ -57,17 +57,15 @@ class quizScene1 extends Scene {
         const randPokemon = shuffle(this.pokemon).pop()
         const randGan = shuffle(this.gan).pop()
 
-        // const randPokemon = this.pokemon[Math.floor(Math.random() * this.pokemon.length)]
-        // const randGan = this.gan[Math.floor(Math.random() * this.gan.length)]
-
         // Will be used to switch random position for the Pokemon and generated Pokemon
-        const randPosition = [400, 1000];
+        const randPosition = [500, 1200];
         
         // Note: shuffle(randPosition).pop() works by shuffling the location array determining left/right
         // position and then popping that position. What's left over is then called again so it'll pick remainder
         this.currentPokemon = this.add.image(shuffle(randPosition).pop(), 450, randPokemon);
         this.currentPokemon.setInteractive();
         this.currentPokemon.on('pointerdown', () => {
+            // correctClick adds to score, creates particle effects, and then switches to new Pokemon
             this.correctClick(this.currentPokemon);
         });
         this.currentGan = this.add.image(shuffle(randPosition).pop(), 400, randGan);
@@ -79,14 +77,17 @@ class quizScene1 extends Scene {
             this.currentPokemon.destroy();
             this.currentGan.destroy();
             this.create();
-
         }, this);
     }
 
     create() {   
         // Game over message
         if (this.pokemon.length <= 0) {
-            this.add.text(150, 400, "Thanks for playing!", { fontSize: 100 });
+            // TODO. This should refresh the page on clicking text
+            this.add.text(150, 400, "Thanks for playing! Click to play again.", { fontSize: 100 }).on('pointerdown', function() {
+                console.log('reached');
+                location.reload();
+            });
         }
 
         this.shufflePokemon();
