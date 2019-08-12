@@ -1,18 +1,22 @@
 import quizScene1 from './quizScene1';
-import { AUTO } from 'phaser';
+import Scale, { AUTO } from 'phaser';
 
 // Make the game fullscreen
 var WIDTH = window.screen.availWidth * window.devicePixelRatio;
-var HEIGHT = window.screen.availHeight * window.devicePixelRatio;
-
-// TODO add multiple scenes per quiz answer
-// https://www.youtube.com/watch?v=S1VSKkL_ePM&list=PLoN_ejT35AEhY4icjiEJ5t2qdunwmQj1R&index=15
+var HEIGHT = (window.screen.availHeight * window.devicePixelRatio) / 2;
 
 const config = {
     type: AUTO,
-    parent: 'phaser-example',
-    width: WIDTH,
-    height: HEIGHT,
+    scale: {
+        // mode: Phaser.Scale.FIT,
+        parent: 'game',
+        // autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: WIDTH,
+        height: HEIGHT,        
+    },
+    // parent: 'game',
+    // width: WIDTH,
+    // height: HEIGHT,
     scene: new quizScene1(),
 };
 
