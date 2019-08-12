@@ -1,0 +1,80 @@
+<html>
+
+<head>
+    <title>Pokemon or PokeGAN?</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="navbar">
+        <ul>
+            <li>
+                <h1 class="title">Pokemon or PokeGAN?</h1>
+            </li>
+            <li><a href="whatisthis.html">What is this?</a></li>
+            <li><a href="howitworks.html">How does it work?</a></li>
+            <li><a href="lessonslearned.html">Lessons Learned</a></li>
+        </ul>
+    </div>
+    <section>
+        <div id="container">
+            <h1>Lessons Learned</h1>
+            <p>
+                Although I thought Wasserstein GANs should have been better I was not able to successfully train a
+                model. My results were nothing but noise, even to the end. I believe I trained it for 1200 epochs if not
+                more. The attempt can be seen <a href="https://github.com/RaymondDashWu/Pokemon-GAN">here</a>.
+            </p>
+            <p>
+                I believe that the ultimate reason neither of these models generated realistic Pokemon is that each
+                Pokemon is incredibly stylized. Unlike a face, horse, or other object that has been generated there is
+                no consistency. Each Pokemon may or may not have arms, legs. Some are based off of objects such as an
+                ice cream cone, a boulder, or a tree. There isn't any defining feature that makes a Pokemon a Pokemon.
+                It seems to be more of an art style once you know what several Pokemon look like. At this moment I'm not
+                aware of a better generative model that would produce better results. However, I believe that the Style
+                GAN did better because it attempted to find those high level attributes and merge them together.
+                Certainly not the most believable Pokemon to someone that has closely followed the series but I think it
+                might fool a person or two who haven't kept up or only know of the series through proxy!
+            </p>
+        </div>
+    </section>
+    <div class="page-footer">
+        <ul>
+            <li>
+                <h3>Content</h3>
+            </li>
+            <li><a href="whatisthis.html">What is this?</a></li>
+            <li><a href="howitworks.html">How does it work?</a></li>
+            <li><a href="lessonslearned.html">Lessons Learned</a></li>
+        </ul>
+
+        <ul>
+            <li>
+                <h3>Resources</h3>
+            </li>
+            <li><a href="https://github.com/NVlabs/stylegan">StyleGAN Implementation</a></li>
+            <li><a href="https://arxiv.org/abs/1812.04948">StyleGAN Paper</a></li>
+            <li><a href="https://arxiv.org/abs/1701.07875">Wasserstein GAN Paper</a></li>
+        </ul>
+
+        <ul>
+            <li>
+                <h3>Contact</h3>
+            </li>
+            <li>
+                <div class="social_links">
+                    <a href="https://github.com/RaymondDashWu/pokemon-gan-quiz"><i class="fa fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/raymonddashwu/"><i class="fa fa-linkedin"></i></a>
+                    <a href="https://medium.com/@RaymondDashWu"><i class="fa fa-medium"></i></a>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+    </div>
+</body>
+
+</html>

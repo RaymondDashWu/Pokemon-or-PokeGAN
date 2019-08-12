@@ -9,7 +9,7 @@ const config = {
     type: AUTO,
     scale: {
         // mode: Phaser.Scale.FIT,
-        parent: 'game',
+        parent: 'phaser-game',
         // autoCenter: Phaser.Scale.CENTER_BOTH,
         width: WIDTH,
         height: HEIGHT,        

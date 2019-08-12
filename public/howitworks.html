@@ -1,0 +1,87 @@
+<html>
+
+<head>
+    <title>Pokemon or PokeGAN?</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="navbar">
+        <ul>
+            <li>
+                <h1 class="title">Pokemon or PokeGAN?</h1>
+            </li>
+            <li><a href="whatisthis.html">What is this?</a></li>
+            <li><a href="howitworks.html">How does it work?</a></li>
+            <li><a href="lessonslearned.html">Lessons Learned</a></li>
+        </ul>
+    </div>
+    <section>
+        <div id="container">
+            <h1>How it Works</h1>
+            <p>
+                The basics of Generative Adversarial Networks (GANs) is that there are actually two deep learning
+                models. One that generates images (the generator) and one that tries to tell if the image is real or
+                fake (the discriminator). The generator will continually make images while the discriminator tries to
+                tell if the images are real or fake. The first couple iterations will be obvious fakes and the
+                discriminator will easily flag them as fake. However, the generator will continue to make tweaks to the
+                image with each set being slightly more believable. This continues until, ideally, the discriminator is
+                no longer able to tell the difference between the two. There are certain ruts that this process can fall
+                into such as mode collapse but this short summary won't cover them.
+            </p>
+            <p>
+                I actually tried two different methods to achieve the results that I did. I used a Wasserstein GAN as
+                well as a Style GAN. These are two different ways to achieve the same generative results. My
+                understanding of the difference is that Style GAN does an excellent job separating "high-level
+                attributes" as NVIDIA puts it. This means things like parts of a face such as freckles, hair, etc. In
+                theory I thought that this would do a good job isolating arms, legs, features, etc. that Pokemon have.
+                However, when do you know when you have a good looking Pokemon? There's a lot of subjectivity in what
+                looks believable. That's where Wasserstein GANs come in. The generator starts out with random noise and
+                makes slight tweaks to the image. As the generator learns more it replaces noise with features. There's
+                a lot more objectivity here as the amount of noise is usually correlated to a better result. In theory
+                and according to papers it was a marked improvement in the world of GANs. However, I ended up using my
+                Style GAN result. This will be talked about in lessons learned.
+            </p>
+        </div>
+    </section>
+    <div class="page-footer">
+        <ul>
+            <li>
+                <h3>Content</h3>
+            </li>
+            <li><a href="whatisthis.html">What is this?</a></li>
+            <li><a href="howitworks.html">How does it work?</a></li>
+            <li><a href="lessonslearned.html">Lessons Learned</a></li>
+        </ul>
+
+        <ul>
+            <li>
+                <h3>Resources</h3>
+            </li>
+            <li><a href="https://github.com/NVlabs/stylegan">StyleGAN Implementation</a></li>
+            <li><a href="https://arxiv.org/abs/1812.04948">StyleGAN Paper</a></li>
+            <li><a href="https://arxiv.org/abs/1701.07875">Wasserstein GAN Paper</a></li>
+        </ul>
+
+        <ul>
+            <li>
+                <h3>Contact</h3>
+            </li>
+            <li>
+                <div class="social_links">
+                    <a href="https://github.com/RaymondDashWu/pokemon-gan-quiz"><i class="fa fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/raymonddashwu/"><i class="fa fa-linkedin"></i></a>
+                    <a href="https://medium.com/@RaymondDashWu"><i class="fa fa-medium"></i></a>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+    </div>
+</body>
+
+</html>
