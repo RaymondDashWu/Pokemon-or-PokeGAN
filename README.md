@@ -1,6 +1,6 @@
-# Phaser 3 Webpack Project Template
+# Pokemon or PokeGAN?
 
-A Phaser 3 Project Template
+Based off of Phaser 3. This is a short quiz that tests your Pokemon knowledge! I've generated several Pokemon using Generative Adversarial Networks (GANs). Can you tell which ones are real and which are fake?
 
 ### Requirements
 
