@@ -47,7 +47,7 @@ class quizScene1 extends Scene {
         
         // Text assets init
         this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
-        this.text = this.add.text(500, 50, "Which of these is a real Pokemon?");
+        this.text = this.add.text(300, 50, "Which of these is a real Pokemon?", { fontSize: '48px', fill: '#fff' });
     }
 
     shufflePokemon() {
