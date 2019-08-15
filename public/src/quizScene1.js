@@ -21,6 +21,11 @@ function shuffle(array) {
     return array;
 }
 
+// Will be used to scale assets and make it responsive
+const WIDTH = screen.width;
+const HEIGHT = screen.height;
+
+
 class quizScene1 extends Scene {
     constructor() {
         super('quiz');
@@ -46,8 +51,8 @@ class quizScene1 extends Scene {
         this.load.atlas('flares', 'assets/particles/flares.png', 'assets/particles/flares.json');
         
         // Text assets init
-        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
-        this.text = this.add.text(300, 50, "Which of these is a real Pokemon?", { fontSize: '48px', fill: '#fff' });
+        this.scoreText = this.add.text(WIDTH/100, HEIGHT/100, 'score: 0', { fontSize: '32px', fill: '#fff' });
+        this.text = this.add.text(WIDTH/2, HEIGHT/20, "Which of these is a real Pokemon?", { fontSize: '48px', fill: '#fff' });
     }
 
     shufflePokemon() {
@@ -58,7 +63,7 @@ class quizScene1 extends Scene {
         const randGan = shuffle(this.gan).pop()
 
         // Will be used to switch random position for the Pokemon and generated Pokemon
-        const randPosition = [500, 1200];
+        const randPosition = [WIDTH*.75, WIDTH*2.5];
         
         // Note: shuffle(randPosition).pop() works by shuffling the location array determining left/right
         // position and then popping that position. What's left over is then called again so it'll pick remainder
@@ -101,13 +106,7 @@ class quizScene1 extends Scene {
             loop: -1
         });
 
-        this.createParticles();
-        // game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-        // let render = this.pokemon1.add.graphics();
-        // let bounds = this.getBounds();
-
-        // render.lineStyle(3, 0xffff37);
-        // render.strokeRectShape(bounds);    
+        this.createParticles(); 
     }
 
     // Helper function to correctClick. When player chooses a Pokemon (correct answer)

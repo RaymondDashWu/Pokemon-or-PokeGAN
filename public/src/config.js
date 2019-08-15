@@ -4,8 +4,8 @@ import Phaser, { AUTO, Scale } from 'phaser';
 
 
 // Make the game fullscreen
-var WIDTH = window.screen.availWidth * window.devicePixelRatio / 2;
-var HEIGHT = (window.screen.availHeight * window.devicePixelRatio) / 2;
+var WIDTH = window.document.body.clientWidth * window.devicePixelRatio;
+var HEIGHT = (window.document.body.clientHeight * window.devicePixelRatio) / 2;
 
 const config = {
     type: AUTO,
