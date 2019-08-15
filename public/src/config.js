@@ -1,22 +1,20 @@
-import quizScene1 from './quizScene1';
-import Phaser, { AUTO, Scale } from 'phaser';
-
-
+import quizScene1 from "./quizScene1";
+import Phaser, { CANVAS, Scale } from "phaser";
 
 // Make the game fullscreen
-var WIDTH = window.screen.availWidth * window.devicePixelRatio / 2;
-var HEIGHT = (window.screen.availHeight * window.devicePixelRatio) / 2;
+var WIDTH = window.document.body.clientWidth * window.devicePixelRatio;
+var HEIGHT = window.document.body.clientHeight * window.devicePixelRatio - 70;
 
 const config = {
-    type: AUTO,
-    scale: {
-        mode: Phaser.Scale.FIT,
-        parent: 'phaser-game',
-        // autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: WIDTH,
-        height: HEIGHT,        
-    },
-    scene: new quizScene1(),
+  type: CANVAS,
+  scale: {
+    // mode: Phaser.Scale.FIT,
+    parent: "phaser-game",
+    // autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: WIDTH,
+    height: HEIGHT
+  },
+  scene: new quizScene1()
 };
 
 export { config };
