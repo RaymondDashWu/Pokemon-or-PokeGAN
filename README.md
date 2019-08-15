@@ -2,6 +2,12 @@
 
 Based off of Phaser 3. This is a short quiz that tests your Pokemon knowledge! I've generated several Pokemon using Generative Adversarial Networks (GANs). Can you tell which ones are real and which are fake?
 
+Mobile version:
+https://pokemon-gan-quiz-l6caw0j6k.now.sh/
+
+Desktop version:
+https://pokemon-gan-quiz-1jfo0xmb1.now.sh/
+
 If you're looking for the deep learning work click here:
 https://github.com/RaymondDashWu/Pokemon-GAN
 
